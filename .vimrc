@@ -1,3 +1,4 @@
+set number
 call plug#begin()
 Plug 'mhinz/vim-startify'
 Plug 'preservim/nerdtree'
