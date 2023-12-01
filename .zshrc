@@ -1,14 +1,17 @@
-# If you come from bash you might have to change your $PATH.
+#If you come from bash you might have to change your $PATH
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=""
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="robbyrussell"
+#ZSH_THEME="agnoster"
+ZSH_THEME="af-magic"
+#ZSH_THEME="bira"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -23,14 +26,13 @@ ZSH_THEME="robbyrussell"
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -45,8 +47,9 @@ ZSH_THEME="robbyrussell"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
-# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -82,11 +85,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
- if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
- else
-   export EDITOR='mvim'
- fi
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -97,59 +100,53 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+plugins=(git zsh-completions zsh-z web-search)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+ if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='vim'
+ else
+   export EDITOR='mvim'
+ fi
+
+
 alias zshconfig="vi ~/.zshrc"
 alias tt='date '\''+%s'\'
 alias j="z"
 alias k="kubectl"
 alias pixel3a="emulator -avd Pixel_3a"
 alias spp="git stash && git pull && git stash pop"
-
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias vim="nvim"
+alias ohmyzsh="mate ~/.oh-my-zsh"
+alias pas="php artisan serve"
+alias pamf="php artisan migrate:fresh"
+alias pamfs="php artisan migrate:fresh --seed"
+alias artisan="php artisan"
+alias phpini="php -i | grep 'php.ini'"
+#alias vector='docker run -i -v $(pwd)/:/etc/vector/ --rm timberio/vector:0.30.0-alpine'
+#alias vector='docker run -i -v $(pwd)/:/etc/vector/ -e DOCKER_HOST="unix:///var/run/docker.sock"  --rm timberio/vector:latest-alpine'
+#alias vector='docker run -i -v ~/vector.toml:/etc/vector/vector.toml:ro --rm timberio/vector:0.30.0-alpine'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+#NVM
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"  # This loads nvm zsh_completion
-
-export GOPATH=$HOME/sdk/go1.18
-export PATH=$PATH:$GOPATH/bin
-export GIT_EDITOR=vim
-# Install Ruby Gems to ~/gems
-export GEM_HOME="$HOME/gems"
-export PATH="$HOME/gems/bin:$PATH"
-
-export PATH="$PATH:/usr/local/bin/composer"
-export PATH=$PATH:~/Android/Sdk/platform-tools/
-export PATH="$PATH:/usr/local/bin/youtube-dl"
-
-#Rust
-export PATH="$PATH:$HOME/.cargo/bin"
-
-#Pip
-export PATH="$PATH:$HOME/.local/bin"
-
-
-
-
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-#export CAPACITOR_ANDROID_STUDIO_PATH="$CAPACITOR_ANDROID_STUDIO_PATH:/usr/local/bin/studio"
-
-export CAPACITOR_ANDROID_STUDIO_PATH="/usr/local/bin/studio"
-
-
-# bun completions
-[ -s "/home/adama/.bun/_bun" ] && source "/home/adama/.bun/_bun"
-
-# bun
-export BUN_INSTALL="/home/adama/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  
+  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" 
+  # This loads nvm bash_completion
 
 # Kubectl completion
 source <(kubectl completion zsh)
@@ -158,8 +155,60 @@ source <(kubectl completion zsh)
 source <(minikube completion zsh)
 
 #AWS
-export AWS_ACCESS_KEY_ID=AKIATELSNJYIY22GHO7T
-export AWS_SECRET_ACCESS_KEY=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
 
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/bin/terraform terraform
+#ANDROID
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/tools
+#export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/emulator
+
+#Flutter
+export PATH=$PATH:~/development/flutter/bin
+
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
+
+
+prompt_context() {
+  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+    prompt_segment black default "%(!.%{%F{yellow}%}.)pigeon"
+  fi
+}
+
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+
+#Laravel
+export PATH=~/.composer/vendor/bin:$PATH
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+
+# bun completions
+[ -s "/Users/adamako/.bun/_bun" ] && source "/Users/adamako/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+JAVA_HOME="~/Library/Java/JavaVirtualMachines/corretto-17.0.5/Contents/Home"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+export PATH="/Users/adamako/.local/bin:$PATH"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+
+
+# Herd injected PHP binary.
+export PATH="/Users/adamako/Library/Application Support/Herd/bin/":$PATH
+
+
+# Herd injected PHP 8.2 configuration.
+export HERD_PHP_82_INI_SCAN_DIR="/Users/adamako/Library/Application Support/Herd/config/php/82/"
